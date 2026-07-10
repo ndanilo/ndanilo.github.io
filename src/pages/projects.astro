@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const projects = await getCollection('projects');
+---
+
+<BaseLayout
+  title="Projects"
+  description="Portfolio projects, technical case studies, and implementation notes."
+>
+  <section class="page">
+    <header>
+      <p class="eyebrow">Projects</p>
+      <h1>Case studies for technical credibility.</h1>
+      <p class="lead">
+        Add project writeups here with the problem, your role, the technical stack, and
+        the result. This gives LinkedIn readers a deeper place to continue.
+      </p>
+    </header>
+    <div class="grid">
+      {
+        projects.map((project) => (
+          <article class="card">
+            <p class="eyebrow">{project.data.role}</p>
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+            <div class="tag-list">
+              {project.data.stack.map((item) => <span class="tag">{item}</span>)}
+            </div>
+            {project.data.link && <a href={project.data.link}>View project</a>}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

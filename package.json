@@ -1,0 +1,37 @@
+{
+  "name": "ndanilo.github.io",
+  "version": "0.1.0",
+  "description": "Technical portfolio and content hub built with Astro for GitHub Pages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndanilo/ndanilo.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "astro",
+    "technical-writing",
+    "github-pages"
+  ],
+  "author": "Danilo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ndanilo/ndanilo.github.io/issues"
+  },
+  "homepage": "https://ndanilo.github.io",
+  "dependencies": {
+    "astro": "^7.0.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
+  }
+}

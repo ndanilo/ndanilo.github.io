@@ -1,0 +1,41 @@
+---
+import '@styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = `${title} | Danilo Technical Portfolio`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Danilo</a>
+      <nav aria-label="Main navigation">
+        <a href="/projects/">Projects</a>
+        <a href="/posts/">Writing</a>
+        <a href="https://github.com/ndanilo">GitHub</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Built with Astro and published with GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
