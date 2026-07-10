@@ -111,7 +111,7 @@ Set `draft: true` on a post to hide it from public pages. Set
 ## Deployment
 
 The GitHub Actions workflow in `.github/workflows/deploy.yml` builds and
-publishes the site when changes are pushed to `main`.
+publishes the site when changes are pushed to `master`.
 
 Deployment steps:
 
