@@ -1,0 +1,19 @@
+LinkedIn draft — publish after the portfolio post is live (set draft: false and deploy).
+
+URL: https://ndanilo.github.io/posts/structured-output-facts-you-can-trust/
+
+---
+
+I'm building a quiz pipeline in LangGraph.js as part of an Applied AI Engineering course.
+
+Before the graph can generate questions, it needs something more basic: a short list of atomic facts pulled from source text — in a shape the next node can actually trust.
+
+Free-form JSON from an LLM is fragile. Models wrap arrays, invent fields, or return almost-valid payloads that break the next step.
+
+In this first stage I used Zod + LangChain's providerStrategy so the model returns a typed list of facts (with importance labels), not unchecked prose. The schema is the product decision: root-level array, 1–10 items, no wrapped `{ facts: [...] }` shape.
+
+Full write-up — including the service wiring, the LangGraph node, and how I unit-test the contract without calling an LLM:
+
+https://ndanilo.github.io/posts/structured-output-facts-you-can-trust/
+
+Code: https://github.com/ndanilo/langchain-ai/tree/main/02-langchain-quiz-generator
