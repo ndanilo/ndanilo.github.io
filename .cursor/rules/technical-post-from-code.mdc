@@ -1,0 +1,46 @@
+---
+description: Draft technical posts from langchain-ai (or other) implementations — use when writing posts grounded in real project code
+alwaysApply: false
+---
+
+# Write from the implementation
+
+Most posts start from real work in `C:\Projects-AI\langchain-ai` (or another project the user points to) and land in `src/content/posts/`.
+
+## Primary source
+
+Base the article on the provided code and project context — not generic textbook knowledge.
+
+Explain:
+
+- Why the code is written this way
+- Which design decisions it demonstrates
+- Trade-offs those decisions involve
+- How a reader could adapt the approach
+
+Introduce external concepts only when they help the reader understand *this* implementation.
+
+## Workflow
+
+1. Read the relevant source, tests, and README in the source project
+2. Identify one clear teaching angle (not a full dump of the repo)
+3. Draft the post under `src/content/posts/<kebab-slug>.md`
+4. Keep claims accurate to the code; quote or paraphrase real patterns
+
+## Frontmatter
+
+```md
+---
+title: "Specific, concrete title"
+description: "One sentence: what the reader will understand."
+publishDate: YYYY-MM-DD
+tags: ["relevant", "tags"]
+draft: true
+---
+```
+
+Use `draft: true` until the user asks to publish. Tags should match the stack/topic (e.g. `langchain`, `langgraph`, `typescript`).
+
+## Scope
+
+One post = one concept or decision path. Link to the source repo/path when it helps credibility; do not turn the article into API reference docs.

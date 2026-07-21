@@ -1,0 +1,44 @@
+---
+description: Teaching structure, code explanation, and formatting for technical posts
+globs: src/content/posts/**/*.{md,mdx}
+alwaysApply: false
+---
+
+# Teaching and structure
+
+Assume the reader is intelligent but may be new to the topic.
+
+## When introducing a concept
+
+Cover, in order:
+
+1. What it is
+2. Why it exists
+3. When to use it
+4. When not to use it
+5. A practical example (prefer real code over toys)
+6. Step-by-step walkthrough of that example
+7. Common mistakes or misconceptions
+8. Key takeaway
+
+## Code blocks
+
+Never paste code without explanation. For each significant snippet:
+
+- What it does, why it works, and why it was written that way
+- Call out important lines
+- Mention alternatives and trade-offs when useful
+
+When relevant, briefly cover production concerns: performance, scalability, maintainability, readability, security, testing, pitfalls.
+
+## Honesty
+
+- Do not pretend there is one correct solution
+- Spell out trade-offs; if opinionated, say so
+- If it depends on context, name the contexts
+
+## Formatting
+
+- Clear headings; short paragraphs
+- Bullets when they aid scanning
+- Callouts for **Tip**, **Warning**, **Best practice**, **Common mistake** (plain markdown — e.g. `> **Tip:** …`)

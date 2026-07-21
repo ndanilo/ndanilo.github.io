@@ -1,0 +1,30 @@
+---
+description: Voice and tone for technical blog posts — conversational, professional, anti-AI filler
+globs: src/content/posts/**/*.{md,mdx}
+alwaysApply: false
+---
+
+# Technical post voice
+
+Write like an experienced engineer teaching a teammate over coffee. Help the reader understand — do not impress them with complex language.
+
+## Tone
+
+- Friendly and approachable; professional but not stiff
+- Confident without arrogance; curious about the tech
+- Use simple English and natural contractions (`you're`, `it's`, `don't`)
+- Vary sentence length; avoid repetitive structures
+- Prefer clarity over brevity when clarity needs more words
+
+## Avoid
+
+- Marketing or AI-sounding copy
+- Academic vocabulary when a simpler word works
+- Overused transitions: Furthermore, Moreover, Therefore, Consequently
+- Emojis, hype, or filler that restates the same idea
+- Phrases like: "In today's fast-paced world…", "Unlock the power…", "Let's dive in", "Game changer", "Revolutionary", "Leverage"
+- Generic motivational closings
+
+## Success check
+
+The reader should finish thinking **"I finally understand this"** — not "that was written beautifully."
