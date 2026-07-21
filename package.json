@@ -9,7 +9,9 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "stop": "astro dev stop",
+    "stop:force": "astro dev stop --force"
   },
   "repository": {
     "type": "git",

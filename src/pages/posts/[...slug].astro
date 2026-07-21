@@ -13,28 +13,67 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const formattedDate = post.data.publishDate.toLocaleDateString('en', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="page">
-    <header>
-      <p class="eyebrow">Article</p>
-      <h1>{post.data.title}</h1>
-      <p class="lead">{post.data.description}</p>
-      <p class="meta">
-        <time datetime={post.data.publishDate.toISOString()}>
-          {
-            post.data.publishDate.toLocaleDateString('en', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })
-          }
+  <div class="container">
+
+    <!-- ============================================================
+         ARTICLE HEADER
+         ============================================================ -->
+    <header class="article-header">
+      <a class="article-header__back" href="/posts/">
+        Back to writing
+      </a>
+
+      <p class="article-header__eyebrow">Article</p>
+
+      <h1 class="article-header__title">{post.data.title}</h1>
+
+      <p class="article-header__description">{post.data.description}</p>
+
+      <div class="article-header__meta">
+        <time class="article-header__date" datetime={post.data.publishDate.toISOString()}>
+          {formattedDate}
         </time>
-      </p>
+        <div class="tag-list" aria-label="Post tags">
+          {post.data.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
     </header>
-    <div class="prose">
+
+    <!-- ============================================================
+         ARTICLE BODY
+         ============================================================ -->
+    <div class="prose" role="main">
       <Content />
     </div>
-  </article>
+
+    <!-- ============================================================
+         ARTICLE FOOTER — back link + CTA
+         ============================================================ -->
+    <footer style="padding: 4rem 0 2rem;">
+      <hr class="divider" style="margin: 0 0 3rem;" />
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <a class="btn btn--ghost" href="/posts/">&larr; All posts</a>
+        <a
+          class="btn btn--primary"
+          href="https://www.linkedin.com/in/ndanilo-software-enginner/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Follow on LinkedIn
+        </a>
+      </div>
+    </footer>
+
+  </div>
 </BaseLayout>

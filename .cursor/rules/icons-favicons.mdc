@@ -1,0 +1,24 @@
+---
+description: SVG and favicon generation conventions for the portfolio
+globs: public/**/*.{svg,png,ico},**/*.svg
+alwaysApply: false
+---
+
+# Icons and favicons
+
+## Favicon
+
+- Primary file: `public/favicon.svg` (linked from `BaseLayout.astro`)
+- Brand mark: horizontal `DN` (single `<text>`, same row) on a rounded square
+- Dark theme: charcoal square `#111318` with cyan letters `#22D3EE` (matches `--color-bg` / `--color-accent`)
+- Light theme (if restored): accent-filled square with white `DN`
+- 64×64 viewBox, `rx="12"`, Inter 800, flat — no gradients, shadows, or stroke
+- Prefer SVG; do not rely on `favicon.png` unless regenerating for legacy clients
+
+## New icons
+
+- Prefer SVG over PNG; place assets under `public/`
+- Flat, geometric, readable at 16–32px
+- Use Inter for lettermarks; keep letterforms horizontal unless explicitly requested otherwise
+- Avoid decorative glow, multi-layer shadows, and emoji-as-icons
+- When the theme accent changes, update icon fills that use the brand color to match `--color-accent`

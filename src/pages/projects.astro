@@ -2,36 +2,69 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const projects = await getCollection('projects');
+const allProjects = await getCollection('projects');
+const featured = allProjects.filter((p) => p.data.featured);
+const rest = allProjects.filter((p) => !p.data.featured);
+const projects = [...featured, ...rest];
 ---
 
 <BaseLayout
   title="Projects"
-  description="Portfolio projects, technical case studies, and implementation notes."
+  description="AI and Node.js project portfolio by Danilo Novais — case studies, technical decisions, and implementation details."
 >
-  <section class="page">
-    <header>
-      <p class="eyebrow">Projects</p>
-      <h1>Case studies for technical credibility.</h1>
-      <p class="lead">
-        Add project writeups here with the problem, your role, the technical stack, and
-        the result. This gives LinkedIn readers a deeper place to continue.
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <div class="container">
+    <header class="page-header">
+      <p class="page-header__eyebrow">Projects</p>
+      <h1 class="page-header__title">
+        Shipped with<br />purpose.
+      </h1>
+      <p class="page-header__lead">
+        Case studies on AI agents, Node.js tooling, and full-stack applications.
+        Each entry covers the problem, the stack, and the key engineering decisions.
       </p>
     </header>
-    <div class="grid">
-      {
-        projects.map((project) => (
+  </div>
+
+  <!-- ============================================================
+       PROJECTS GRID
+       ============================================================ -->
+  <section class="section" style="padding-top: 0;" aria-label="All projects">
+    <div class="container">
+
+      {projects.length === 0 && (
+        <p style="color: var(--color-text-muted);">Projects are being documented — check back soon.</p>
+      )}
+
+      <div class="grid-3">
+        {projects.map((project) => (
           <article class="card">
-            <p class="eyebrow">{project.data.role}</p>
-            <h3>{project.data.title}</h3>
-            <p>{project.data.description}</p>
-            <div class="tag-list">
-              {project.data.stack.map((item) => <span class="tag">{item}</span>)}
+            <p class="card__eyebrow">{project.data.role}</p>
+            <h2 class="card__title">{project.data.title}</h2>
+            <p class="card__body">{project.data.description}</p>
+            <div class="tag-list" aria-label="Tech stack">
+              {project.data.stack.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
             </div>
-            {project.data.link && <a href={project.data.link}>View project</a>}
+            {project.data.link && (
+              <a
+                class="card__link"
+                href={project.data.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View project
+              </a>
+            )}
           </article>
-        ))
-      }
+        ))}
+      </div>
+
     </div>
   </section>
+
 </BaseLayout>

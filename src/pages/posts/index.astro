@@ -9,22 +9,39 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 
 <BaseLayout
   title="Writing"
-  description="Technical articles, engineering notes, and portfolio updates."
+  description="Technical articles on AI engineering, Node.js, and software architecture by Danilo Novais."
 >
-  <section class="page">
-    <header>
-      <p class="eyebrow">Writing</p>
-      <h1>Technical notes with practical context.</h1>
-      <p class="lead">
-        Use this section for articles that can be shared on LinkedIn and expanded here
-        with more examples, decisions, and implementation detail.
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <div class="container">
+    <header class="page-header">
+      <p class="page-header__eyebrow">Writing</p>
+      <h1 class="page-header__title">
+        Ideas worth<br />reading twice.
+      </h1>
+      <p class="page-header__lead">
+        Deep-dives on AI engineering, Node.js patterns, and practical architecture decisions.
+        Each article starts as a LinkedIn post and grows into something more here.
       </p>
     </header>
-    <div class="grid">
-      {
-        posts.map((post) => (
+  </div>
+
+  <!-- ============================================================
+       POSTS GRID
+       ============================================================ -->
+  <section class="section" style="padding-top: 0;" aria-label="All posts">
+    <div class="container">
+
+      {posts.length === 0 && (
+        <p style="color: var(--color-text-muted);">No posts published yet — stay tuned.</p>
+      )}
+
+      <div class="grid-3">
+        {posts.map((post) => (
           <article class="card">
-            <p class="meta">
+            <p class="card__meta">
               <time datetime={post.data.publishDate.toISOString()}>
                 {post.data.publishDate.toLocaleDateString('en', {
                   month: 'short',
@@ -33,16 +50,21 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
                 })}
               </time>
             </p>
-            <h3>
+            <h2 class="card__title">
               <a href={`/posts/${post.id}/`}>{post.data.title}</a>
-            </h3>
-            <p>{post.data.description}</p>
-            <div class="tag-list">
-              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </h2>
+            <p class="card__body">{post.data.description}</p>
+            <div class="tag-list" aria-label="Post tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
             </div>
+            <a class="card__link" href={`/posts/${post.id}/`}>Read article</a>
           </article>
-        ))
-      }
+        ))}
+      </div>
+
     </div>
   </section>
+
 </BaseLayout>

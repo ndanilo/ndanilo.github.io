@@ -13,64 +13,122 @@ const projects = (await getCollection('projects'))
 
 <BaseLayout
   title="Home"
-  description="Technical portfolio, project writeups, and engineering notes by Danilo."
+  description="Technical portfolio, AI engineering articles, and project writeups by Danilo Novais. Published on LinkedIn and expanded here."
 >
-  <section class="hero">
-    <div>
-      <p class="eyebrow">Technical portfolio</p>
-      <h1>Build, write, share, repeat.</h1>
-      <p class="lead">
-        A professional home for technical articles, project case studies, and practical
-        engineering notes. The goal is to support LinkedIn content with a deeper website
-        and a public GitHub presence.
-      </p>
-      <div class="actions">
-        <a class="button" href="/posts/">Read the writing</a>
-        <a class="button secondary" href="/projects/">View projects</a>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" aria-label="Introduction">
+    <div class="container hero__grid">
+
+      <!-- Left: headline + CTA -->
+      <div class="hero__content">
+        <p class="hero__eyebrow">Software Engineer &amp; AI Builder</p>
+
+        <h1 class="hero__title">
+          Build smart.<br />
+          Ship <em>fast</em>.<br />
+          Write clearly.
+        </h1>
+
+        <p class="hero__lead">
+          Technical articles, Node.js + AI project writeups, and engineering notes.
+          Posts go deeper than LinkedIn — this is where the implementation lives.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="/posts/">Read the writing</a>
+          <a class="btn btn--ghost" href="/projects/">View projects</a>
+        </div>
       </div>
+
+      <!-- Right: info panel (hidden on mobile via CSS) -->
+      <aside class="info-panel" aria-label="Focus areas">
+        <p class="info-panel__label">Current focus</p>
+
+        <div class="info-panel__item">
+          <span class="info-panel__dot" aria-hidden="true"></span>
+          <span>AI agents &amp; LLM orchestration with Node.js</span>
+        </div>
+        <div class="info-panel__item">
+          <span class="info-panel__dot" aria-hidden="true"></span>
+          <span>RAG pipelines and vector search</span>
+        </div>
+        <div class="info-panel__item">
+          <span class="info-panel__dot" aria-hidden="true"></span>
+          <span>Developer tooling and automation workflows</span>
+        </div>
+        <div class="info-panel__item">
+          <span class="info-panel__dot" aria-hidden="true"></span>
+          <span>Technical writing bridging LinkedIn &amp; GitHub</span>
+        </div>
+      </aside>
+
     </div>
-    <aside class="panel" aria-label="Portfolio strategy">
-      <p class="eyebrow">Positioning loop</p>
-      <ul>
-        <li>Publish useful technical notes on the website.</li>
-        <li>Share the short version on LinkedIn.</li>
-        <li>Point readers to GitHub for implementation details.</li>
-        <li>Build authority through consistent, practical content.</li>
-      </ul>
-    </aside>
   </section>
 
-  <section class="section">
-    <div class="section-header">
-      <h2>Featured Projects</h2>
-      <a href="/projects/">See all projects</a>
-    </div>
-    <div class="grid">
-      {
-        projects.map((project) => (
+  <!-- ============================================================
+       FEATURED PROJECTS
+       ============================================================ -->
+  <section class="section" aria-labelledby="projects-heading">
+    <div class="container">
+
+      <div class="section__header">
+        <h2 class="section__title" id="projects-heading">Featured Projects</h2>
+        <a class="section__link" href="/projects/">See all projects →</a>
+      </div>
+
+      {projects.length === 0 && (
+        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+          Projects coming soon — check back after the next LinkedIn post.
+        </p>
+      )}
+
+      <div class="grid-3">
+        {projects.map((project) => (
           <article class="card">
-            <p class="eyebrow">{project.data.role}</p>
-            <h3>{project.data.title}</h3>
-            <p>{project.data.description}</p>
-            <div class="tag-list">
-              {project.data.stack.map((item) => <span class="tag">{item}</span>)}
+            <p class="card__eyebrow">{project.data.role}</p>
+            <h3 class="card__title">{project.data.title}</h3>
+            <p class="card__body">{project.data.description}</p>
+            <div class="tag-list" aria-label="Tech stack">
+              {project.data.stack.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
             </div>
+            {project.data.link && (
+              <a class="card__link" href={project.data.link} target="_blank" rel="noopener noreferrer">
+                View project
+              </a>
+            )}
           </article>
-        ))
-      }
+        ))}
+      </div>
+
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-header">
-      <h2>Latest Writing</h2>
-      <a href="/posts/">See all posts</a>
-    </div>
-    <div class="grid">
-      {
-        posts.map((post) => (
+  <!-- ============================================================
+       LATEST WRITING
+       ============================================================ -->
+  <section class="section" aria-labelledby="writing-heading" style="padding-top: 0;">
+    <div class="container">
+
+      <div class="section__header">
+        <h2 class="section__title" id="writing-heading">Latest Writing</h2>
+        <a class="section__link" href="/posts/">See all posts →</a>
+      </div>
+
+      {posts.length === 0 && (
+        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+          First post is on its way — follow on LinkedIn for updates.
+        </p>
+      )}
+
+      <div class="grid-3">
+        {posts.map((post) => (
           <article class="card">
-            <p class="meta">
+            <p class="card__meta">
               <time datetime={post.data.publishDate.toISOString()}>
                 {post.data.publishDate.toLocaleDateString('en', {
                   month: 'short',
@@ -79,16 +137,20 @@ const projects = (await getCollection('projects'))
                 })}
               </time>
             </p>
-            <h3>
+            <h3 class="card__title">
               <a href={`/posts/${post.id}/`}>{post.data.title}</a>
             </h3>
-            <p>{post.data.description}</p>
-            <div class="tag-list">
-              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            <p class="card__body">{post.data.description}</p>
+            <div class="tag-list" aria-label="Post tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
             </div>
           </article>
-        ))
-      }
+        ))}
+      </div>
+
     </div>
   </section>
+
 </BaseLayout>

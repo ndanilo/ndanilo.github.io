@@ -1,0 +1,34 @@
+---
+description: Portfolio design tokens and CSS conventions (charcoal + cyan)
+alwaysApply: true
+---
+
+# Design system
+
+- Edit colors only via `:root` tokens in `src/styles/global.css`. Do not put ad-hoc hex in `.astro` pages.
+- Prefer existing BEM classes in `global.css`; do not invent a parallel style system.
+- Theme changes must update: tokens, matching hardcodes, and favicon colors to match the palette.
+
+## Current palette (refined dark — charcoal + cyan)
+
+| Token | Value |
+|---|---|
+| `--color-bg` | `#111318` |
+| `--color-surface` | `#181b22` |
+| `--color-surface-2` | `#22262f` |
+| `--color-border` | `#2a2f3a` |
+| `--color-border-soft` | `#1f232c` |
+| `--color-text` | `#F1F5F9` |
+| `--color-text-muted` | `#94A3B8` |
+| `--color-text-subtle` | `#64748B` |
+| `--color-accent` | `#22D3EE` |
+| `--color-accent-soft` | `#083344` |
+
+`color-scheme: dark`.
+
+## Hardcode exceptions (must match bg / accent)
+
+- `.site-header` backdrop: `rgb(17 19 24 / 0.85)` (equals `--color-bg`)
+- `.btn--primary` / `.nav-cta`: dark text `#0F172A` on cyan (bright accent needs dark ink)
+- `.btn--primary:hover`: `#67E8F9` with `#0F172A` text
+- `--shadow-card`: dark UI shadows (`rgb(0 0 0 / 0.35)` / `0.3`)
