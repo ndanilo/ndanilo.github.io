@@ -10,7 +10,7 @@ I'm building a quiz generator with LangGraph.js. Before the graph can invent que
 
 This post is about that first stage only. The quiz product is not finished. What *is* finished enough to teach is the pattern underneath it — **structured output** — and why schema design is part of the product, not a boring type detail.
 
-The code lives in [`02-langchain-quiz-generator`](https://github.com/ndanilo/langchain-ai/tree/main/02-langchain-quiz-generator) in my course repo.
+The code lives in [`02-langchain-quiz-generator`](https://github.com/ndanilo/langchain-ai/tree/main/02-langchain-quiz-generator) in my repo.
 
 ## What structured output is
 
