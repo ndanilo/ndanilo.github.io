@@ -44,3 +44,12 @@ Use `draft: true` until the user asks to publish. Tags should match the stack/to
 ## Scope
 
 One post = one concept or decision path. Link to the source repo/path when it helps credibility; do not turn the article into API reference docs.
+
+## Series / continuations
+
+When a post continues a prior article (same project arc, “what’s next” follow-up, or staged pipeline):
+
+1. **New post → previous** — In the hook or early body, link to the prior post so readers who land mid-series can go back.
+2. **Previous post → new** — Update the prior post’s **What’s next** (or equivalent closing) to link to the new slug. Do not leave a vague “separate post someday” once that post exists.
+3. **Both directions** — A continuation is incomplete until both links exist. Prefer site paths like `/posts/<slug>/`.
+4. **Drafts** — You may add the forward link while the sequel is still `draft: true` if the user is about to publish; otherwise wait until the sequel is ready so `/posts/` does not 404 for readers of the published prior post.

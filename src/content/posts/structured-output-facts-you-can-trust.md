@@ -232,4 +232,4 @@ Design the schema for the consumer you have not written yet. That is usually mor
 
 ## What’s next
 
-When the next stage lands — turning these facts into questions — that will be a separate design problem, and a separate post.
+Turning these facts into questions is a separate design problem: typed graph state between stages, not another JSON blob in chat history. That sequel is [LangGraph state between stages: turning facts into questions](/posts/langgraph-state-facts-to-questions/).
