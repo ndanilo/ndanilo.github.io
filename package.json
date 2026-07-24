@@ -30,6 +30,7 @@
   },
   "homepage": "https://ndanilo.github.io",
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.2.1",
     "astro": "^7.0.7"
   },
   "devDependencies": {

@@ -4,6 +4,8 @@ description: "How typed graph state carries facts and source text into a second 
 publishDate: 2026-07-24
 tags: ["langchain", "langgraph", "typescript", "zod"]
 draft: false
+demoVideo: "/posts/langgraph-state-facts-to-questions/facts-to-questions-pipeline.mp4"
+demoVideoTitle: "LangGraph Studio run: initial message, extracted facts, then generated questions"
 ---
 
 In the [first stage of this quiz pipeline](/posts/structured-output-facts-you-can-trust/), structured output gave me a list of facts the rest of the code could trust. That solved the model contract. It did not solve the *graph* contract.
@@ -112,7 +114,11 @@ const result = await llmService.generateStructuredOutputAsync<Questions>(
 );
 ```
 
-On success it writes `questions` (and marks `success: true`). Same gateway pattern as fact extraction; different contract: a root-level array of `{ question, options }`.
+On success it writes `questions` (and marks `success: true`). Same gateway pattern as fact extraction; different contract: a root-level array of question objects with a stem and options.
+
+Here is that handoff in LangGraph Studio — initial message in, `facts` filled by the first node, then `questions` written by the second:
+
+<!-- demo-video -->
 
 ## Fail fast between stages
 

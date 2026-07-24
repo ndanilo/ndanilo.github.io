@@ -672,6 +672,14 @@ code, .mono {
   font-size: 0.9rem;
 }
 
+.prose video,
+.prose .post-demo-video {
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
 /* --------------------------------------------------------------------------
    15. ARTICLE HEADER
    -------------------------------------------------------------------------- */

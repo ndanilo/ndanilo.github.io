@@ -1,6 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PostDemoVideo from '@components/PostDemoVideo.astro';
+
+const DEMO_MARKER = '<!-- demo-video -->';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -12,21 +16,36 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
 
 const formattedDate = post.data.publishDate.toLocaleDateString('en', {
   month: 'long',
   day: 'numeric',
   year: 'numeric',
 });
+
+const demoSrc = post.data.demoVideo;
+const demoTitle =
+  post.data.demoVideoTitle ?? 'Pipeline demo';
+const body = post.body ?? '';
+const wantsInlineDemo = Boolean(demoSrc) && body.includes(DEMO_MARKER);
+
+let beforeHtml = '';
+let afterHtml = '';
+let Content: Awaited<ReturnType<typeof render>>['Content'] | null = null;
+
+if (wantsInlineDemo && demoSrc) {
+  const [before, after = ''] = body.split(DEMO_MARKER);
+  const processor = await createMarkdownProcessor();
+  beforeHtml = (await processor.render(before)).code;
+  afterHtml = (await processor.render(after)).code;
+} else {
+  ({ Content } = await render(post));
+}
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
   <div class="container">
 
-    <!-- ============================================================
-         ARTICLE HEADER
-         ============================================================ -->
     <header class="article-header">
       <a class="article-header__back" href="/posts/">
         Back to writing
@@ -50,16 +69,18 @@ const formattedDate = post.data.publishDate.toLocaleDateString('en', {
       </div>
     </header>
 
-    <!-- ============================================================
-         ARTICLE BODY
-         ============================================================ -->
     <div class="prose" role="main">
-      <Content />
+      {wantsInlineDemo && demoSrc ? (
+        <>
+          <Fragment set:html={beforeHtml} />
+          <PostDemoVideo src={demoSrc} title={demoTitle} />
+          <Fragment set:html={afterHtml} />
+        </>
+      ) : (
+        Content && <Content />
+      )}
     </div>
 
-    <!-- ============================================================
-         ARTICLE FOOTER — back link + CTA
-         ============================================================ -->
     <footer style="padding: 4rem 0 2rem;">
       <hr class="divider" style="margin: 0 0 3rem;" />
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">

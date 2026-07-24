@@ -45,6 +45,14 @@ Use `draft: true` until the user asks to publish. Tags should match the stack/to
 
 One post = one concept or decision path. Link to the source repo/path when it helps credibility; do not turn the article into API reference docs.
 
+## Media in posts
+
+- Static files: `public/posts/<post-slug>/<descriptive-kebab-name>.mp4`
+- Prefer **MP4** (portfolio + LinkedIn). Keep demos muted/looping.
+- Do **not** put raw `<video>` (or other HTML) in Markdown — Astro may escape it or SmartyPants can break attributes.
+- Do **not** use MDX for TypeScript-heavy posts (`Partial<T>` / `{...}` in prose breaks as JSX).
+- Instead: set frontmatter `demoVideo` + `demoVideoTitle`, and place `<!-- demo-video -->` in the body where the player should appear. The post page injects `PostDemoVideo` there.
+
 ## Series / continuations
 
 When a post continues a prior article (same project arc, “what’s next” follow-up, or staged pipeline):

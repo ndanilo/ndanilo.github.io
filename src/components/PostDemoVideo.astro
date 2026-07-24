@@ -1,0 +1,20 @@
+---
+/** Looping muted demo used inside article bodies via frontmatter + marker. */
+interface Props {
+  src: string;
+  title: string;
+}
+
+const { src, title } = Astro.props;
+---
+
+<video
+  class="post-demo-video"
+  src={src}
+  autoplay
+  loop
+  muted
+  playsinline
+  controls
+  title={title}
+></video>

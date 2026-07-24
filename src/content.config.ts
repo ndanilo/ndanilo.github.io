@@ -10,6 +10,9 @@ const posts = defineCollection({
     publishDate: z.coerce.date(),
     tags: z.array(z.string()),
     draft: z.boolean().default(false),
+    /** Public URL path to a looping demo (e.g. /posts/slug/demo.mp4). */
+    demoVideo: z.string().optional(),
+    demoVideoTitle: z.string().optional(),
   }),
 });
 
