@@ -106,4 +106,4 @@ The Claude Desktop prompt in the repo still mentions `matplotlib` from an older 
 
 The best daily automations **compile intelligence into code** and treat the scheduler as a dumb, reliable executor. AI helped me discover the EVO flow, shape the scripts, and document the ops path. What runs every morning is Python, exit codes, and a short status message — not a fresh reasoning session.
 
-That is how my wife's team gets branch-level sales reports in the inbox before the floor opens, without paying for yesterday's discovery work again today.
+That is how my wife gets branch-level sales reports in the inbox before the floor opens, without paying for yesterday's discovery work again today.
